@@ -26,25 +26,24 @@ const FeatureBar: React.FC<FeatureBarProps> = ({
     return () => clearTimeout(timeout)
   })
 
-  // Move the responsive modal styling to the Box component
   return (
     <CenterModal isOpen={delayPassed && !hide}>
       <Box sx={{
-        width: ['90%', '70%', '50%'], // Modal width based on screen size
+        variant: 'layout.featureBar', // Assuming you have a variant in your theme
         display: 'flex',
-        flexDirection: 'column', // Stack modal content vertically
+        flexDirection: 'column',
         justifyContent: 'center',
-        p: [1, 2], // Padding: smaller on mobile, larger on desktop
+        alignItems: 'center',
+        p: 3,
+        bg: 'background', // Use your theme colors
+        color: 'text', // Use your theme colors
+        '@media screen and (min-width: 768px)': {
+          flexDirection: 'row',
+        },
       }}>
         <ModalTitle>{title}</ModalTitle>
-        {description}
-        <Box sx={{
-          display: 'flex',
-          justifyContent: 'center',
-          flexDirection: ['column', 'row'], // Stack action elements on mobile, side-by-side on desktop
-        }}>
-          {action && action}
-        </Box>
+        {description && <Box>{description}</Box>}
+        {action && <Box>{action}</Box>}
       </Box>
     </CenterModal>
   )
