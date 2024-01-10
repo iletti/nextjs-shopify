@@ -55,7 +55,7 @@ const CartSidebarView: FC = () => {
           <Bag />
           Your cart is empty
           <Text>
-            Biscuit oat cake wafer icing ice cream tiramisu pudding cupcake.
+            Go to products and add items to your cart.
           </Text>
         </>
       ) : (
@@ -65,7 +65,7 @@ const CartSidebarView: FC = () => {
               key={item.id}
               item={item}
               // todo update types
-              currencyCode={item.variant?.priceV2?.currencyCode || 'USD'}
+              currencyCode={item.variant?.priceV2?.currencyCode || 'EUR'}
             />
           ))}
           <Card sx={{ marginLeft: 'auto', minWidth: '10rem', paddingLeft: 5 }}>
@@ -73,16 +73,16 @@ const CartSidebarView: FC = () => {
               <Text>Subtotal:</Text>
               <Text sx={{ marginLeft: 'auto' }}>{subTotal}</Text>
               <Text>Shipping:</Text>
-              <Text sx={{ marginLeft: 'auto' }}> - </Text>
+              <Text sx={{ marginLeft: 'auto' }}> Included </Text>
               <Text>Tax: </Text>
-              <Text sx={{ marginLeft: 'auto' }}> - </Text>
+              <Text sx={{ marginLeft: 'auto' }}> Included </Text>
             </Grid>
 
             <Divider />
             <Grid gap={1} columns={2}>
-              <Text variant="bold">Estimated Total:</Text>
+              <Text variant="bold">Total:</Text>
               <Text variant="bold" sx={{ marginLeft: 'auto' }}>
-                {total}
+                {subTotal}
               </Text>
             </Grid>
           </Card>
@@ -90,7 +90,7 @@ const CartSidebarView: FC = () => {
           {checkoutUrl && (
             <NavLink
               variant="nav"
-              sx={{ width: '100%', m: 2, p: 12, textAlign: 'center' }}
+              sx={{ width: '100%', m: 2, p: 12, textAlign: 'center', backgroundColor: '#FF6B6B' }}
               href={checkoutUrl!}
             >
               Proceed to Checkout
