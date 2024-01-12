@@ -40,7 +40,7 @@ import {
             </Head>
   
             <div>
-              <div>{data?.title}</div>
+            
               {/* Render the Builder drag/drop'd content */}
               <BuilderComponent
                 name="blog-article"
