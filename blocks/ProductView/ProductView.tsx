@@ -77,122 +77,160 @@ const ProductBox: React.FC<Props> = ({
       setLoading(false)
     }
   }
-  const allImages = images
-    .map(({ src }) => ({ src: src.src }))
-    .concat(
-      product.images &&
-        product.images.filter(
-          ({ src }) => !images.find((image) => image.src.src === src)
-        )
-    )
 
-  return (
-    <React.Fragment>
-      {renderSeo && (
-        <NextSeo
-          title={title}
-          description={description}
-          openGraph={{
-            type: 'website',
-            title: title,
-            description: description,
-            images: [
-              {
-                url: product.images?.[0]?.src!,
-                width: 800,
-                height: 600,
-                alt: title,
-              },
-            ],
+  const allImages = images
+  .map(({ src }) => ({ src: src.src }))
+  .concat(
+    product.images &&
+      product.images.filter(
+        ({ src }) => !images.find((image) => image.src.src === src)
+      )
+  );
+
+const hasSale = variant.compareAtPriceV2 && parseFloat(variant.compareAtPriceV2.amount) > parseFloat(variant.priceV2.amount);
+const salePrice = hasSale
+? getPrice(variant.compareAtPriceV2.amount, variant.compareAtPriceV2.currencyCode)
+: null;
+
+return (
+  <React.Fragment>
+    {renderSeo && (
+      <NextSeo
+        title={title}
+        description={description}
+        openGraph={{
+          type: 'website',
+          title: title,
+          description: description,
+          images: [
+            {
+              // Correction: Ensure the URL is a string.
+              url: product.images?.[0]?.src || '',
+              width: 800,
+              height: 600,
+              alt: title,
+            },
+          ],
+        }}
+      />
+    )}
+    <Grid gap={4} columns={[1, 2]}>
+      <div>
+        {hasSale && (
+          <div sx={{
+            position: 'absolute',
+            top: 2,
+            right: 2,
+            backgroundColor: '#F29F05', // Sale badge color
+            color: 'white',
+            padding: '0.5em',
+            borderRadius: '4px',
+            fontSize: '0.8em',
+            fontWeight: 'bold',
+            textTransform: 'uppercase',
+            zIndex: '9999', // Ensure the badge is above other content
+          }}>
+            Sale
+          </div>
+        )}
+        <div
+          sx={{
+            border: '1px solid gray',
+            padding: 2,
+            marginBottom: 2,
           }}
-        />
-      )}
-      <Grid gap={4} columns={[1, 2]}>
-        <div>
-          <div
-            sx={{
-              border: '1px solid gray',
-              padding: 2,
-              marginBottom: 2,
-            }}
-          >
-            <ImageCarousel
-              showZoom
-              alt={title}
-              width={1050}
-              height={1050}
-              priority
-              onThumbnailClick={(index) => {
-                if (images[index]?.color) {
-                  setColor(images[index].color)
-                }
-              }}
-              images={
-                allImages?.length > 0
-                  ? allImages
-                  : [
-                      {
-                        src: `https://via.placeholder.com/1050x1050`,
-                      },
-                    ]
+        >
+          <ImageCarousel
+            showZoom
+            alt={title}
+            width={1050}
+            height={1050}
+            priority
+            onThumbnailClick={(index) => {
+              if (images[index]?.color) {
+                setColor(images[index].color)
               }
-            ></ImageCarousel>
-          </div>
-        </div>
-        <div sx={{ display: 'flex', flexDirection: 'column' }}>
-          <span sx={{ mt: 0, mb: 2 }}>
-            <Heading>{title}</Heading>
-            <Heading as="h4" aria-label="price" sx={{ mt: 0, mb: 2 }}>
-              {getPrice(variant.priceV2.amount, variant.priceV2.currencyCode)}
-            </Heading>
-          </span>
-          <div dangerouslySetInnerHTML={{ __html: description! }} />
-          <div>
-            <Grid padding={2} columns={2}>
-              {colors?.length && (
-                <OptionPicker
-                  key="Color"
-                  name="Color"
-                  options={colors}
-                  selected={color}
-                  onChange={(event) => setColor(event.target.value)}
-                />
-              )}
-              {sizes?.length && (
-                <OptionPicker
-                  key="Size"
-                  name="Size"
-                  options={sizes}
-                  selected={size}
-                  onChange={(event) => setSize(event.target.value)}
-                />
-              )}
-            </Grid>
-          </div>
-          <Button
-            name="add-to-cart"
-            disabled={loading}
-            sx={{ margin: 2, display: 'block' }}
-            onClick={addToCart}
-          >
-            Add to Cart {loading && '...'}
-          </Button>
-        </div>
-      </Grid>
-    </React.Fragment>
-  )
+            }}
+            images={
+              allImages?.length > 0
+                ? allImages
+                : [
+                    {
+                      // Correction: Template literal should be used for the placeholder image URL.
+                      src: 'https://via.placeholder.com/1050x1050',
+},
+]
 }
+/>
+</div>
+</div>
+<div sx={{ display: 'flex', flexDirection: 'column' }}>
+<span sx={{ mt: 0, mb: 2 }}>
+<Heading>{title}</Heading>
+<Heading as="h4" aria-label="price" sx={{ mt: 0, mb: 2 }}>
+{hasSale ? (
+<>
+<span sx={{ textDecoration: 'line-through' }}>
+{salePrice}
+</span>
+{' '}
+<span>
+{getPrice(variant.priceV2.amount, variant.priceV2.currencyCode)}
+</span>
+</>
+) : (
+getPrice(variant.priceV2.amount, variant.priceV2.currencyCode)
+)}
+</Heading>
+</span>
+{/* Correction: Safely handle the case where description may be undefined */}
+<div dangerouslySetInnerHTML={{ __html: description || '' }} />
+<div>
+<Grid padding={2} columns={2}>
+{colors && colors.length > 0 && (
+  <OptionPicker
+    key="Color"
+    name="Color"
+    options={colors}
+    selected={color}
+    onChange={(event) => setColor(event.target.value)}
+  />
+)}
+{sizes && sizes.length > 0 && (
+  <OptionPicker
+    key="Size"
+    name="Size"
+    options={sizes}
+    selected={size}
+    onChange={(event) => setSize(event.target.value)}
+  />
+)}
+</Grid>
+</div>
+<Button
+name="add-to-cart"
+disabled={loading}
+sx={{ margin: 2, display: 'block' }}
+onClick={addToCart}
+>
+Add to Cart {loading && '...'}
+</Button>
+</div>
+</Grid>
+</React.Fragment>
+);
+};
 
 const ProductView: React.FC<{
-  product: string | ShopifyBuy.Product
-  renderSeo?: boolean
-  description?: string
-  title?: string
+product: string | ShopifyBuy.Product
+renderSeo?: boolean
+description?: string
+title?: string
 }> = ({ product, ...props }) => {
-  return (
-    <ProductLoader product={product}>
-      {(productObject) => <ProductBox {...props} product={productObject} />}
-    </ProductLoader>
-  )
+return (
+<ProductLoader product={product}>
+{(productObject) => <ProductBox {...props} product={productObject} />}
+</ProductLoader>
+)
 }
 export default ProductView
