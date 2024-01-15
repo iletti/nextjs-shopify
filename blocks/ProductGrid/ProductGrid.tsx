@@ -14,6 +14,8 @@ interface HighlightedCardProps extends Omit<ProductCardProps, 'product'> {
   index: number
 }
 
+
+
 export interface ProductGridProps {
   products?: ShopifyBuy.Product[]
   productsList?: Array<{ product: string }>
