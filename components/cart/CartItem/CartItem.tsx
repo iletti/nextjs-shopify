@@ -46,6 +46,17 @@ const CartItem = ({
       updateQuantity(val)
     }
   }
+ // Determine if the item is on sale
+ const hasSale = item.variant.compareAtPriceV2 && 
+ parseFloat(item.variant.compareAtPriceV2.amount) > 
+ parseFloat(item.variant.priceV2.amount);
+
+// Get the sale price
+const salePrice = hasSale ? getPrice(item.variant.compareAtPriceV2.amount, currencyCode) : null;
+
+// Get the current price
+const currentPrice = getPrice(item.variant.priceV2.amount, currencyCode);
+
   const handleRemove = async () => {
     setRemoving(true)
 
@@ -85,27 +96,33 @@ const CartItem = ({
         />
       </div>
       <div>
-        <Link
-          href={`/product/${item.variant.product.handle}/`}
-          sx={{ fontSize: 3, m: 0, fontWeight: 700 }}
+    <Link
+      href={`/product/${item.variant.product.handle}/`}
+      sx={{ fontSize: 3, m: 0, fontWeight: 700 }}
+    >
+      <>
+        {item.title}
+        {/* Display the sale price if there's a sale, otherwise the current price */}
+        <Text
+          sx={{
+            fontSize: 4,
+            fontWeight: 700,
+            display: 'block',
+            marginLeft: 'auto',
+          }}
         >
-          <>
-            {item.title}
-            <Text
-              sx={{
-                fontSize: 4,
-                fontWeight: 700,
-                display: 'block',
-                marginLeft: 'auto',
-              }}
-            >
-              {getPrice(
-                item.variant.priceV2.amount,
-                item.variant.priceV2.currencyCode || 'USD'
-              )}
-            </Text>
-          </>
-        </Link>
+          {hasSale ? (
+            <>
+              <span sx={{ textDecoration: 'line-through' }}>{salePrice}</span>
+              {' '}
+              <span>{currentPrice}</span>
+            </>
+          ) : (
+            currentPrice
+          )}
+        </Text>
+      </>
+    </Link>
         <ul sx={{ mt: 2, mb: 0, padding: 0, listStyle: 'none' }}>
           <li>
             <div sx={{ display: 'flex', justifyItems: 'center' }}>
