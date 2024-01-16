@@ -46,6 +46,7 @@ const CartSidebarView: FC = () => {
         flexDirection: 'column',
         alignItems: 'center',
         px: 2,
+        zIndex: 9999,
         color: 'background',
         ...(isEmpty && { justifyContent: 'center' }),
       }}
