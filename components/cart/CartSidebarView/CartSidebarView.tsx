@@ -38,6 +38,7 @@ const CartSidebarView: FC = () => {
   return (
     <Box
       sx={{
+        position: 'relative', // This ensures z-index is effective
         height: '100%',
         overflow: 'auto',
         paddingBottom: 5,
@@ -46,7 +47,7 @@ const CartSidebarView: FC = () => {
         flexDirection: 'column',
         alignItems: 'center',
         px: 2,
-        zIndex: 9999,
+        zIndex: 9999, // High z-index to stack above other elements
         color: 'background',
         ...(isEmpty && { justifyContent: 'center' }),
       }}
