@@ -56,7 +56,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             position: 'absolute',
             top: 2, // Adjust as needed
             right: 2, // Adjust as needed
-            backgroundColor: '#F29F05', // Changed to your specified color
+            backgroundColor: '#FEFCEF', // Changed to your specified color
             color: 'white',
             padding: '0.5em',
             borderRadius: '4px',
