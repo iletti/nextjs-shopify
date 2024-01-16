@@ -38,18 +38,14 @@ const CartSidebarView: FC = () => {
   return (
     <Box
       sx={{
-        position: 'fixed', // Make sure the cart is fixed and overlays other content
-        top: 0, // Align to the top of the viewport
-        right: 0, // Align to the right of the viewport
-        width: ['100%', '400px'], // Full width on mobile, specific width on larger screens
-        height: '100vh', // Full viewport height
-        overflowY: 'auto', // Allow vertical scrolling
-        bg: 'text', // Background color from theme
+        height: '100%',
+        overflow: 'auto',
+        paddingBottom: 5,
+        bg: 'text',
         display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         px: 2,
-        zIndex: 9999, // Ensure it's above other content
         color: 'background',
         ...(isEmpty && { justifyContent: 'center' }),
       }}
