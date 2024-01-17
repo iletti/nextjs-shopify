@@ -73,7 +73,7 @@ const CartSidebarView: FC = () => {
               <Text>Subtotal:</Text>
               <Text sx={{ marginLeft: 'auto' }}>{subTotal}</Text>
               <Text>Shipping:</Text>
-              <Text sx={{ marginLeft: 'auto' }}> Included </Text>
+              <Text sx={{ marginLeft: 'auto' }}> Calculated at checkout </Text>
               <Text>Tax: </Text>
               <Text sx={{ marginLeft: 'auto' }}> Included </Text>
             </Grid>
