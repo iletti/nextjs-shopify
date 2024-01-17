@@ -68,15 +68,29 @@ const ProductBox: React.FC<Props> = ({
   }, [size, color, variants, variant.id])
 
   const addToCart = async () => {
-    setLoading(true)
+    setLoading(true);
     try {
-      await addItem(variant.id, 1)
-      openSidebar()
-      setLoading(false)
+      await addItem(variant.id, 1);
+      openSidebar();
+      setLoading(false);
+  
+      // Assuming the global `gtag` function is already loaded and available
+      if (typeof window !== 'undefined' && window.gtag) {
+        window.gtag('event', 'add_to_cart', {
+          currency: variant.priceV2.currencyCode,
+          items: [{
+            id: variant.id.toString(),
+            name: product.title,
+            quantity: 1,
+            price: variant.priceV2.amount.toString(),
+          }],
+        });
+      }
     } catch (err) {
-      setLoading(false)
+      console.error('Failed to add item to cart', err);
+      setLoading(false);
     }
-  }
+  };
 
   const allImages = images
   .map(({ src }) => ({ src: src.src }))
