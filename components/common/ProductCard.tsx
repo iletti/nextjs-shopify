@@ -46,10 +46,8 @@ const ProductCard: React.FC<ProductCardProps> = ({
           maxWidth: [700, imgWidth || 540],
           p: 3,
           display: 'flex',
-          backgroundColor: '#FEFCEF',
           flexDirection: 'column',
           // Add this to give a z-index higher than the image/carousel
-          zIndex: 1,
         }}
       >
         {hasSale && (
@@ -57,7 +55,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             position: 'absolute',
             top: 2, // Adjust as needed
             right: 2, // Adjust as needed
-            backgroundColor: '#F29F05', // Changed to your specified color
+            backgroundColor: '#FFFFF', // Changed to your specified color
             color: 'white',
             padding: '0.5em',
             borderRadius: '4px',
@@ -65,7 +63,7 @@ const ProductCard: React.FC<ProductCardProps> = ({
             fontWeight: 'bold',
             textTransform: 'uppercase',
             // Ensure the badge is above all other content
-            zIndex: 2,
+            zIndex: 1,
           }}>
             Sale
           </div>
