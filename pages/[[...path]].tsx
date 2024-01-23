@@ -19,6 +19,7 @@ import { resolveBuilderContent } from '@lib/resolve-builder-content'
 builder.init(builderConfig.apiKey)
 import '../blocks/ProductGrid/ProductGrid.builder'
 import '../blocks/CollectionView/CollectionView.builder'
+import '../blocks/CollectionSlider/CollectionSlider.builder'
 import { useThemeUI } from '@theme-ui/core'
 import { getLayoutProps } from '@lib/get-layout-props'
 import { useAddItemToCart } from '@lib/shopify/storefront-data-hooks'

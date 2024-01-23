@@ -14,6 +14,8 @@ import '../blocks/ProductGrid/ProductGrid.builder';
 import '../blocks/CollectionView/CollectionView.builder';
 import '../blocks/ProductView/ProductView.builder';
 import '../blocks/CloudinaryImage/CloudinaryImage.builder';
+import '../blocks/CollectionSlider/CollectionSlider.builder';
+
 
 // Register insert menus for Builder.io components
 Builder.register('insertMenu', {
