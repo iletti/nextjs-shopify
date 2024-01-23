@@ -4,7 +4,7 @@ The ultimate stddarter for headless Shopify stores.
 
 Demo live at: [headless.builders](https://headless.builders/)
 
-## Goals and Features
+## Goals and Features 
 
 - Ultra high performance
 - SEO optimized
