@@ -1,0 +1,19 @@
+# robots.txt for https://untamedbynature.com
+
+Sitemap: https://untamedbynature.com/sitemap.xml
+
+User-agent: *
+
+Allow: /
+Allow: /collections/
+Allow: /products/
+
+Disallow: /accounts/
+Disallow: /checkout/
+Disallow: /cart/
+Disallow: /admin/
+Disallow: /search/
+Disallow: /api/
+
+# Optional: Uncomment the following line if needed to control crawl rate.
+# Crawl-delay: 10
