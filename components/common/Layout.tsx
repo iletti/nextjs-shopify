@@ -15,11 +15,11 @@ import shopifyConfig from '@config/shopify'
 import { builder, BuilderContent, Builder } from '@builder.io/react'
 import themesMap from '@config/theme'
 import seoConfig from '@config/seo.json'
-import NoSSR from './NoSSR'
+/* import NoSSR from './NoSSR' */
 
-const FeatureBar = dynamic(() => import('@components/common/FeatureBar'), {
+/* const FeatureBar = dynamic(() => import('@components/common/FeatureBar'), {
   ssr: false,
-})
+}) */
 
 const Layout: React.FC<{ pageProps: any; children: React.ReactNode }> = ({
   children,
@@ -98,7 +98,7 @@ const InnerLayout: React.FC<{
       >
         <CartSidebarView />
       </Sidebar>
-      <NoSSR>
+{/*     <NoSSR>
         <FeatureBar
           title="This site uses cookies to improve your experience. By clicking, you agree to our Privacy Policy."
           hide={Builder.isEditing ? true : acceptedCookies}
@@ -106,7 +106,8 @@ const InnerLayout: React.FC<{
             <Button onClick={() => onAcceptCookies()}>Accept cookies</Button>
           }
         />
-      </NoSSR>
+      </NoSSR> */}
+      
     </ThemeProvider>
   )
 }
