@@ -15,6 +15,7 @@ import shopifyConfig from '@config/shopify'
 import { builder, BuilderContent, Builder } from '@builder.io/react'
 import themesMap from '@config/theme'
 import seoConfig from '@config/seo.json'
+import { GoogleTagManager } from '@next/third-parties/google'; // Import GoogleTagManager component
 /* import NoSSR from './NoSSR' */
 
 /* const FeatureBar = dynamic(() => import('@components/common/FeatureBar'), {
@@ -39,6 +40,7 @@ const Layout: React.FC<{ pageProps: any; children: React.ReactNode }> = ({
           return (
             <ManagedUIContext key={data?.id} siteSettings={siteSettings}>
               <Head seoInfo={siteSeoInfo || seoConfig} />
+              <GoogleTagManager gtmId="GTM-NJ9HM2RR" />
               <InnerLayout
                 themeName={data?.theme || 'base'}
                 colorOverrides={colorOverrides}
