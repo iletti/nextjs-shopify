@@ -10,10 +10,11 @@ const Head: FC<{ seoInfo: any }> = (props) => {
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="manifest" href="/site.webmanifest" key="site-manifest" />
         <link
-          rel="icon"
-          type="image/png"
-          href="https://cdn.builder.io/api/v1/image/assets%2FYJIGb4i01jvw0SRdL5Bt%2F2d86a5bb30f44d2db3564aa2962bb093"
-        />
+  rel="icon"
+  type="image/svg+xml"
+  href="https://cdn.builder.io/api/v1/image/assets%2F6072e6c1f08c4d4486723e2017e1b62e%2F344375df42794459a8a1febee50a0110"
+/>
+
       </NextHead>
     </>
   )
